@@ -1,9 +1,10 @@
 package co.com.mypoint.experience.controller;
 
 import co.com.mypoint.experience.domain.Experience;
+import co.com.mypoint.experience.domain.Page;
 import co.com.mypoint.experience.service.ExperienceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -12,9 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+import javax.validation.Valid;
 import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-07-04T04:07:12.369Z")
 
@@ -44,22 +44,27 @@ public class ExperienceApiController implements ExperienceApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<List<Experience>> listExperience(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name,@ApiParam(value = "Estado") @Valid @RequestParam(value = "status", required = false) Integer status) {
+    @Override
+    public ResponseEntity<List<Experience>> listExperience(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name) {
         String accept = request.getHeader("Accept");
         try {
-            List<Experience> experienceList = experienceService.findAllfindAll();
+            List<Experience> experienceList = experienceService.findAll();
             return new ResponseEntity<List<Experience>>(experienceList, HttpStatus.OK);
         } catch (Exception e) {
             log.error("Couldn't serialize response for content type application/json; charset=utf-8", e);
             return new ResponseEntity<List<Experience>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
 
+    @Override
+    public ResponseEntity<List<Page>> listExperienceTabs(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name) {
+        return null;
     }
 
     public ResponseEntity<Void> updateExperience(@ApiParam(value = "Objecto experiencia que será actualizado" ,required=true )  @Valid @RequestBody Experience body) {
         log.debug("--updateExperience");
         String accept = request.getHeader("Accept");
-        Experience experience = experienceService.addExperience(body);
+        Experience experience = experienceService.updateExperience(body);
         log.debug("--experience update: " + experience);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }

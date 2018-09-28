@@ -27,7 +27,7 @@ public class ExperienceService {
         return experienceRepository.save(experience);
     }
 
-    public List<Experience> findAllfindAll() {
+    public List<Experience> findAll() {
         Iterable<Experience> list = experienceRepository.findAll();
         List<Experience> result = StreamSupport.stream(list.spliterator(), false)
                 .collect(Collectors.toList());

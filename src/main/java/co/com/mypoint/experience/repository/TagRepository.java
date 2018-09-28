@@ -1,13 +1,14 @@
 package co.com.mypoint.experience.repository;
 
 import co.com.mypoint.experience.domain.Experience;
+import co.com.mypoint.experience.domain.Tag;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 
-public interface ExperienceRepository extends Neo4jRepository<Experience, Long> {
+public interface TagRepository extends Neo4jRepository<Tag, Long> {
 
     @Override
-    Experience save(Experience entity);
+    Tag save(Tag entity);
 
     @Override
-    Iterable<Experience> findAll();
+    Iterable<Tag> findAll();
 }

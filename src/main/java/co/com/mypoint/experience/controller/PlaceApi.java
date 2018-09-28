@@ -5,9 +5,7 @@
  */
 package co.com.mypoint.experience.controller;
 
-
-import co.com.mypoint.experience.domain.Experience;
-import co.com.mypoint.experience.domain.Page;
+import co.com.mypoint.experience.domain.Place;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -25,60 +23,49 @@ import javax.validation.constraints.*;
 import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-09-28T20:31:26.708Z")
 
-@Api(value = "experience", description = "the experience API")
-public interface ExperienceApi {
+@Api(value = "place", description = "the place API")
+public interface PlaceApi {
 
-    @ApiOperation(value = "Nueva experiencia/paquete", nickname = "addExperience", notes = "Agregar nueva experiencia o paquete de servicios", authorizations = {
+    @ApiOperation(value = "Nuevo lugar", nickname = "addPlace", notes = "Agregar nuevo lugar", authorizations = {
         @Authorization(value = "petstore_auth", scopes = {
             @AuthorizationScope(scope = "write:pets", description = "modify experience in your account"),
             @AuthorizationScope(scope = "read:pets", description = "read your experience")
             })
-    }, tags={ "experience", })
+    }, tags={ "place", })
     @ApiResponses(value = { 
         @ApiResponse(code = 405, message = "Invalid input") })
-    @RequestMapping(value = "/experience",
+    @RequestMapping(value = "/place",
         produces = { "application/xml; charset=utf-8", "application/json; charset=utf-8" }, 
         consumes = { "application/json; charset=utf-8", "application/xml; charset=utf-8" },
         method = RequestMethod.POST)
-    ResponseEntity<Void> addExperience(@ApiParam(value = "Objecto experiencia que será agregado", required = true) @Valid @RequestBody Experience body);
+    ResponseEntity<Void> addPlace(@ApiParam(value = "Objecto place que será agregado", required = true) @Valid @RequestBody Place body);
 
 
-    @ApiOperation(value = "Lista las experiencias registradas", nickname = "listExperience", notes = "Lista las experiencias registradas por diferentes parámetros", response = Experience.class, responseContainer = "List", tags={ "experience", })
+    @ApiOperation(value = "Lista los lugares", nickname = "listPlace", notes = "Lista los lugares", response = Place.class, responseContainer = "List", tags={ "place", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Experience.class, responseContainer = "List"),
+        @ApiResponse(code = 200, message = "successful operation", response = Place.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "Invalid status value"),
         @ApiResponse(code = 401, message = "Unauthorized user") })
-    @RequestMapping(value = "/experience",
+    @RequestMapping(value = "/place",
         produces = { "application/json; charset=utf-8", "application/xml; charset=utf-8" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<Experience>> listExperience(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name);
+    ResponseEntity<List<Place>> listPlace(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name);
 
 
-    @ApiOperation(value = "Lista las secciones de una página", nickname = "listExperienceTabs", notes = "Lista las secciones con sus experiencias", response = Page.class, responseContainer = "List", tags={ "experience", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Page.class, responseContainer = "List"),
-        @ApiResponse(code = 400, message = "Invalid status value"),
-        @ApiResponse(code = 401, message = "Unauthorized user") })
-    @RequestMapping(value = "/experience/page",
-        produces = { "application/json; charset=utf-8", "application/xml; charset=utf-8" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<List<Page>> listExperienceTabs(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name);
-
-
-    @ApiOperation(value = "Actualiza experiencia/paquete", nickname = "updateExperience", notes = "Actualiza una experiencia o paquete de servicios existente", authorizations = {
+    @ApiOperation(value = "Actualiza lugar", nickname = "updatePlace", notes = "Actualiza un lugar", authorizations = {
         @Authorization(value = "petstore_auth", scopes = {
             @AuthorizationScope(scope = "write:pets", description = "modify experience in your account"),
             @AuthorizationScope(scope = "read:pets", description = "read your experience")
             })
-    }, tags={ "experience", })
+    }, tags={ "place", })
     @ApiResponses(value = { 
         @ApiResponse(code = 400, message = "Invalid ID supplied"),
         @ApiResponse(code = 404, message = "Experiencia not found"),
         @ApiResponse(code = 405, message = "Validation exception") })
-    @RequestMapping(value = "/experience",
+    @RequestMapping(value = "/place",
         produces = { "application/xml; charset=utf-8", "application/json; charset=utf-8" }, 
         consumes = { "application/json; charset=utf-8", "application/xml; charset=utf-8" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> updateExperience(@ApiParam(value = "Objecto experiencia que será actualizado", required = true) @Valid @RequestBody Experience body);
+    ResponseEntity<Void> updatePlace(@ApiParam(value = "Objecto lugar que será actualizado", required = true) @Valid @RequestBody Place body);
 
 }
