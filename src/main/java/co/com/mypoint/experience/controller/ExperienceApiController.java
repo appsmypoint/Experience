@@ -7,6 +7,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-07-04T04:07:12.369Z")
 
@@ -45,10 +49,16 @@ public class ExperienceApiController implements ExperienceApi {
     }
 
     @Override
-    public ResponseEntity<List<Experience>> listExperience(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name) {
+    public ResponseEntity<List<Experience>> listExperience(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name, @ApiParam(value = "Lugar") @Valid @RequestParam(value = "place", required = false) String place, @ApiParam(value = "Etiqueta") @Valid @RequestParam(value = "tag", required = false) String tag, @ApiParam(value = "page to be returned") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @ApiParam(value = "number of items to be returned") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize, @ApiParam(value = "offset to be taken according to the underlying page and page size") @Valid @RequestParam(value = "offset", required = false) Integer offset) {
         String accept = request.getHeader("Accept");
         try {
-            List<Experience> experienceList = experienceService.findAll();
+            List<Experience> experienceList = new ArrayList<>();
+            if (pageNumber != null && pageSize != null ) {
+                experienceList = experienceService.findAll(PageRequest.of(pageNumber, pageSize, Sort.by("name")));
+            } else {
+                experienceList = experienceService.findAll();
+            }
+
             return new ResponseEntity<List<Experience>>(experienceList, HttpStatus.OK);
         } catch (Exception e) {
             log.error("Couldn't serialize response for content type application/json; charset=utf-8", e);
@@ -57,7 +67,7 @@ public class ExperienceApiController implements ExperienceApi {
     }
 
     @Override
-    public ResponseEntity<List<Page>> listExperienceTabs(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name) {
+    public ResponseEntity<List<Page>> listExperienceTabs(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name, @ApiParam(value = "Lugar") @Valid @RequestParam(value = "place", required = false) String place, @ApiParam(value = "Etiqueta") @Valid @RequestParam(value = "tag", required = false) String tag, @ApiParam(value = "page to be returned") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @ApiParam(value = "number of items to be returned") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize, @ApiParam(value = "offset to be taken according to the underlying page and page size") @Valid @RequestParam(value = "offset", required = false) Integer offset) {
         return null;
     }
 

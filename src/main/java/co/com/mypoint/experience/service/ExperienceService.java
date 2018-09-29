@@ -2,6 +2,7 @@ package co.com.mypoint.experience.service;
 
 import co.com.mypoint.experience.domain.Experience;
 import co.com.mypoint.experience.repository.ExperienceRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,5 +35,11 @@ public class ExperienceService {
         return result;
     }
 
+    public List<Experience> findAll(Pageable pageable) {
+        Iterable<Experience> list = experienceRepository.findAll(pageable);
+        List<Experience> result = StreamSupport.stream(list.spliterator(), false)
+                .collect(Collectors.toList());
+        return result;
+    }
 
 }
