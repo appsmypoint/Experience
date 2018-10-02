@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-09-28T21:44:27.075Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-10-02T03:21:31.603Z")
 
 @Api(value = "experience", description = "the experience API")
 public interface ExperienceApi {
@@ -54,15 +54,15 @@ public interface ExperienceApi {
     ResponseEntity<List<Experience>> listExperience(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name, @ApiParam(value = "Lugar") @Valid @RequestParam(value = "place", required = false) String place, @ApiParam(value = "Etiqueta") @Valid @RequestParam(value = "tag", required = false) String tag, @ApiParam(value = "page to be returned") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @ApiParam(value = "number of items to be returned") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize, @ApiParam(value = "offset to be taken according to the underlying page and page size") @Valid @RequestParam(value = "offset", required = false) Integer offset);
 
 
-    @ApiOperation(value = "Lista las secciones de una página", nickname = "listExperienceTabs", notes = "Lista las secciones con sus experiencias", response = Page.class, responseContainer = "List", tags={ "experience", })
+    @ApiOperation(value = "Lista las secciones de una página", nickname = "listExperienceTabs", notes = "Lista las secciones con sus experiencias", response = Page.class, tags={ "experience", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Page.class, responseContainer = "List"),
+        @ApiResponse(code = 200, message = "successful operation", response = Page.class),
         @ApiResponse(code = 400, message = "Invalid status value"),
         @ApiResponse(code = 401, message = "Unauthorized user") })
     @RequestMapping(value = "/experience/page",
         produces = { "application/json; charset=utf-8", "application/xml; charset=utf-8" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<Page>> listExperienceTabs(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name, @ApiParam(value = "Lugar") @Valid @RequestParam(value = "place", required = false) String place, @ApiParam(value = "Etiqueta") @Valid @RequestParam(value = "tag", required = false) String tag, @ApiParam(value = "page to be returned") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @ApiParam(value = "number of items to be returned") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize, @ApiParam(value = "offset to be taken according to the underlying page and page size") @Valid @RequestParam(value = "offset", required = false) Integer offset);
+    ResponseEntity<Page> listExperienceTabs(@ApiParam(value = "Nombre") @Valid @RequestParam(value = "name", required = false) String name, @ApiParam(value = "Lugar") @Valid @RequestParam(value = "place", required = false) String place, @ApiParam(value = "Etiqueta") @Valid @RequestParam(value = "tag", required = false) String tag, @ApiParam(value = "page to be returned") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @ApiParam(value = "number of items to be returned") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize, @ApiParam(value = "offset to be taken according to the underlying page and page size") @Valid @RequestParam(value = "offset", required = false) Integer offset);
 
 
     @ApiOperation(value = "Actualiza experiencia/paquete", nickname = "updateExperience", notes = "Actualiza una experiencia o paquete de servicios existente", authorizations = {
