@@ -110,8 +110,10 @@ public class ExperienceApiController implements ExperienceApi {
                     sectionItems = new ArrayList<>();
 
                     index = 1;
+                } else {
+                    index++;
                 }
-                index++;
+
             }
 
 
