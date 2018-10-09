@@ -5,7 +5,6 @@
  */
 package co.com.mypoint.experience.controller;
 
-
 import co.com.mypoint.experience.domain.Experience;
 import co.com.mypoint.experience.domain.Page;
 import io.swagger.annotations.*;
@@ -23,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-10-02T03:21:31.603Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-10-09T11:42:51.850Z")
 
 @Api(value = "experience", description = "the experience API")
 public interface ExperienceApi {
@@ -41,6 +40,17 @@ public interface ExperienceApi {
         consumes = { "application/json; charset=utf-8", "application/xml; charset=utf-8" },
         method = RequestMethod.POST)
     ResponseEntity<Void> addExperience(@ApiParam(value = "Objecto experiencia que será agregado", required = true) @Valid @RequestBody Experience body);
+
+
+    @ApiOperation(value = "Lista las secciones de una página", nickname = "experienceById", notes = "Lista las secciones con sus experiencias", response = Object.class, tags={ "experience", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = Object.class),
+        @ApiResponse(code = 400, message = "Invalid status value"),
+        @ApiResponse(code = 401, message = "Unauthorized user") })
+    @RequestMapping(value = "/experience/page/{id}",
+        produces = { "application/json; charset=utf-8", "application/xml; charset=utf-8" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<Object> experienceById(@ApiParam(value = "Nombre", required = true) @PathVariable("id") Integer id);
 
 
     @ApiOperation(value = "Lista las experiencias registradas", nickname = "listExperience", notes = "Lista las experiencias registradas por diferentes parámetros", response = Experience.class, responseContainer = "List", tags={ "experience", })

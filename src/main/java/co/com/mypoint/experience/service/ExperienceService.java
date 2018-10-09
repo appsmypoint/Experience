@@ -35,6 +35,12 @@ public class ExperienceService {
         return result;
     }
 
+    public Experience findById(Integer id) {
+        Experience experience = experienceRepository.findById((long)id).get();
+
+        return experience;
+    }
+
     public List<Experience> findAll(Pageable pageable) {
         Iterable<Experience> list = experienceRepository.findAll(pageable);
         List<Experience> result = StreamSupport.stream(list.spliterator(), false)

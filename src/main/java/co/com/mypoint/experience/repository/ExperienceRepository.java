@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 
+import java.util.Optional;
+
 public interface ExperienceRepository extends Neo4jRepository<Experience, Long> {
 
     @Override
@@ -15,4 +17,7 @@ public interface ExperienceRepository extends Neo4jRepository<Experience, Long> 
 
     @Override
     Page<Experience> findAll(Pageable pageable);
+
+    @Override
+    Optional<Experience> findById(Long aLong);
 }

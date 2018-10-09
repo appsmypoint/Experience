@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -51,6 +52,19 @@ public class ExperienceApiController implements ExperienceApi {
         Experience experience = experienceService.addExperience(body);
         log.debug("--experience created: " + experience);
         return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Object> experienceById(@ApiParam(value = "Nombre", required = true) @PathVariable("id") Integer id) {
+        try {
+            Experience experience = experienceService.findById(id);
+
+
+            return new ResponseEntity<Object>(experience, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Couldn't serialize response for content type application/json; charset=utf-8", e);
+            return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
