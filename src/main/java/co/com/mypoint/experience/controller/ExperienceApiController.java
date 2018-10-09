@@ -94,14 +94,26 @@ public class ExperienceApiController implements ExperienceApi {
             section.setTitle("Lo mejor del oriente Antioqueño");
             //section.setSectionItems(Collections.singletonList(experienceList));
             List<Object> sectionItems = new ArrayList<>();
-
+            int index = 1;
             for (Experience experience : experienceList) {
                 //log.debug("--experience " + experience);
                 sectionItems.add(experience);
+                if (index == 3) {
+                    section.setSectionItems(sectionItems);
+                    sections.add(section);
 
+                    section = new Section();
+                    section.setComponentType("ExperienceUI");
+                    section.setDisplayType("carousel");
+                    section.setTitle("");
+
+                    sectionItems = new ArrayList<>();
+
+                    index = 1;
+                }
+                index++;
             }
-            section.setSectionItems(sectionItems);
-            sections.add(section);
+
 
             page.setPaginationMetadata(paginationMetadata);
             page.setSections(sections);
